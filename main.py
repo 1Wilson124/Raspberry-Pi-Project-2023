@@ -13,11 +13,7 @@ from paho.mqtt import client as mqtt_client
 broker = '192.168.1.28'
 port = 1883
 topic = "TEST"
-# generate client ID with pub prefix randomly
 client_id = '2'
-# username = 'emqx'
-# password = 'public'
-
 array1=["bedroom1","bedroom2","livingroom","kitchen","office", "bathroom"]
 array2=["bedroom1h","bedroom2h","livingroomh","kitchenh","officeh", "bathroomh"]
 app = Flask(__name__)
