@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+</head>
+
+<body>
+    <iframe name="hidden" width="0" height="0" border="0" style="display: none;"></iframe>
+    <h1>PioFuels</h1>
+
+    <div class="tab">
+        <button class="tablinks" onclick="change_tab(event, 'ELECTRICITY')">LIGHTING</button>
+        <button class="tablinks" onclick="change_tab(event, 'HEATING')">HEATING</button>
+        <button class="tablinks" onclick="change_tab(event, 'SOLAR PANEL')">SOLAR PANEL</button>
+    </div>
+
+    <div id="ELECTRICITY" class="tabcontent">
+        <h3>Lighting</h3>
+        <form action="/configure" target="hidden" method="POST" >
+            Bedroom 1 Light :
+            <button type="submit" value="on bedroom1" onClick="changecolour('on bedroom1');" id="bedroom1on" name= "submit"  class="button rounded-corners">On</button>
+            <button type="submit" value="off bedroom1" onClick="changecolour('off bedroom1');" id="bedroom1off" name= "submit"  class="button rounded-corners">Off</button>
+
+        </form>
+      
+        <form action="/configure" target="hidden" method="POST" >
+            Bedroom 2 Light :
+            <button type="submit" value="on bedroom2" onClick="changecolour('on bedroom2');" id="bedroom2on" name= "submit"  class="button rounded-corners">On</button>
+            <button type="submit" value="off bedroom2" onClick="changecolour('off bedroom2');" id="bedroom2off" name= "submit"  class="button rounded-corners">Off</button>
+        </form>
+
+        <form action="/configure" target="hidden" method="POST" >
+            Living Room Light :
+           <button type="submit" value="on livingroom" onClick="changecolour('on livingroom');" id="livingroomon" name= "submit"  class="button rounded-corners">On</button>
+            <button type="submit" value="off livingroom" onClick="changecolour('off livingroom');" id="livingroomoff" name= "submit"  class="button rounded-corners">Off</button>
+        </form>
+
+        <form action="/configure" target="hidden" method="POST" >
+            Kitchen Light :
+            <button type="submit" value="on kitchen" onClick="changecolour('on kitchen');" id="kitchenon" name= "submit"  class="button rounded-corners">On</button>
+            <button type="submit" value="off kitchen" onClick="changecolour('off kitchen');" id="kitchenoff" name= "submit"  class="button rounded-corners">Off</button>
+        </form>
+
+        <form action="/configure" target="hidden" method="POST" >
+            Office Light :
+            <button type="submit" value="on office" onClick="changecolour('on office');" id="officeon" name= "submit"  class="button rounded-corners">On</button>
+            <button type="submit" value="off office" onClick="changecolour('off office');" id="officeoff" name= "submit"  class="button rounded-corners">Off</button>
+        </form>
+
+        <form action="/configure" target="hidden" method="POST" >
+            Bathroom Light :
+            <button type="submit" value="on bathroom" onClick="changecolour('on bathroom');" id="bathroomon" name= "submit"  class="button rounded-corners">On</button>
+            <button type="submit" value="off bathroom" onClick="changecolour('off bathroom');" id="bathroomoff" name= "submit"  class="button rounded-corners">Off</button>
+        </form>
+    </div>
+
+    <div id="HEATING" class="tabcontent">
+        <h3>Heating</h3>
+        <form action="/configure" target="hidden" method="POST" >
+            Bedroom 1 Heat:
+            <button type="submit" value="on bedroom1h" onClick="changecolour('on bedroom1h');" id="bedroom1hon" name= "submit"  class="button rounded-corners">On</button>
+            <button type="submit" value="off bedroom1h" onClick="changecolour('off bedroom1h');" id="bedroom1hoff" name= "submit"  class="button rounded-corners">Off</button>
+
+        </form>
+      
+        <form action="/configure" target="hidden" method="POST" >
+            Bedroom 2 Heat:
+            <button type="submit" value="on bedroom2h" onClick="changecolour('on bedroom2h');" id="bedroom2hon" name= "submit"  class="button rounded-corners">On</button>
+            <button type="submit" value="off bedroom2h" onClick="changecolour('off bedroom2h');" id="bedroom2hoff" name= "submit"  class="button rounded-corners">Off</button>
+        </form>
+
+        <form action="/configure" target="hidden" method="POST" >
+            Living Room Heat:
+           <button type="submit" value="on livingroomh" onClick="changecolour('on livingroomh');" id="livingroomhon" name= "submit"  class="button rounded-corners">On</button>
+            <button type="submit" value="off livingroomh" onClick="changecolour('off livingroomh');" id="livingroomhoff" name= "submit"  class="button rounded-corners">Off</button>
+        </form>
+
+        <form action="/configure" target="hidden" method="POST" >
+            Kitchen Heat:
+            <button type="submit" value="on kitchenh" onClick="changecolour('on kitchenh');" id="kitchenhon" name= "submit"  class="button rounded-corners">On</button>
+            <button type="submit" value="off kitchenh" onClick="changecolour('off kitchenh');" id="kitchenhoff" name= "submit"  class="button rounded-corners">Off</button>
+        </form>
+
+        <form action="/configure" target="hidden" method="POST" >
+            Office Heat:
+            <button type="submit" value="on officeh" onClick="changecolour('on officeh');" id="officehon" name= "submit"  class="button rounded-corners">On</button>
+            <button type="submit" value="off officeh" onClick="changecolour('off officeh');" id="officehoff" name= "submit"  class="button rounded-corners">Off</button>
+        </form>
+
+        <form action="/configure" target="hidden" method="POST" >
+            Bathroom Heat:
+            <button type="submit" value="on bathroomh" onClick="changecolour('on bathroomh');" id="bathroomhon" name= "submit"  class="button rounded-corners">On</button>
+            <button type="submit" value="off bathroomh" onClick="changecolour('off bathroomh');" id="bathroomhoff" name= "submit"  class="button rounded-corners">Off</button>
+        </form>
+    </div>
+
+    <div id="SOLAR PANEL" class="tabcontent">
+        <h3>Solar Panel stats</h3>
+        <header>PiHome Dashboard</header>
+
+        <div id="column-1">
+            <div class="block"><canvas id="chart"></canvas></div>
+            <div class="block">
+                <div class="mini-block">
+                    <h1>{{ data["Net Energy"] }} KWh</h1>
+                    <h2>Net Energy</h2>
+                </div>
+                <div class="mini-block">
+                    <h1>{{ data["Energy Used"] }} KWh</h1>
+                    <h2>Energy Used</h2>
+                </div>
+                <div class="mini-block">
+                    <h1>{{ data["Energy Gained"] }} KWh </h1>
+                    <h2>Energy Gained</h2>
+                </div>
+                <div class="mini-block">
+                    <h1>{{ data["Water Used"] }} L</h1>
+                    <h2>Water Used</h2>
+                </div>
+                <div class="mini-block">
+                    <h1>{{ data["Temperature"] }} °C</h1>
+                    <h2>Temperature</h2>
+                </div>
+            </div>
+        </div>
+        <div id="column-2">
+            <div class="block"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js')}}">
+      
+    </script>
+
+
+    
+</body>
+</html>
